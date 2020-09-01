@@ -36,6 +36,16 @@ def desktop_path(system):
 
     return desktop
 
+# args: None
+# returns: the path to the created directory on the desktop
+def create_folder(desk):
+
+    directory = "Cleaned"
+    path = os.path.join(desk, directory)
+    os.mkdir(path)
+
+    return path
+
 if __name__=="__main__":
 
     system = operating_system()
@@ -47,5 +57,7 @@ if __name__=="__main__":
 
     if not desk:
         sys.exit("No desktop path found.")
+
+    folder = create_folder(desk)
 
     print("Success")
