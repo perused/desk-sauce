@@ -3,27 +3,27 @@ import os
 import re
 import tkinter as tk
 
-SYSTEM = ""
-
+# args: None
+# returns: the type of operating system the current computer is running on, None if error
 def operating_system():
 
     if sys.platform == "linux" or platform == "linux2":
-        SYSTEM = "linux"
+        return "linux"
 
     elif sys.platform == "darwin":
-        SYSTEM = "osx"
+        return "osx"
 
     elif sys.platform == "win32":
-        SYSTEM = "windows"
+        return "windows"
 
-    return SYSTEM
+    return None
 
 # args: None
-# returns: the path to the desktop on the current computer
-def desktop_path():
+# returns: the path to the desktop on the current computer, None if error
+def desktop_path(system):
 
     # desktop from home directory
-    if SYSTEM == "LINUX":
+    if system == "linux" or system == "osx":
         desktop = os.path.join(os.path.join(os.path.expanduser('~')), 'Desktop')
 
     else:
@@ -38,7 +38,12 @@ def desktop_path():
 
 if __name__=="__main__":
 
-    desk = desktop_path()
+    system = operating_system()
+
+    if not system:
+        sys.exit("Unable to identify operating system.")
+
+    desk = desktop_path(system)
 
     if not desk:
         sys.exit("No desktop path found.")
