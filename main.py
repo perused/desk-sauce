@@ -20,18 +20,19 @@ def operating_system():
 # returns: the path to the desktop on the current computer
 def desktop_path():
 
-    # desktop from home directory on unix/linux
-    desktop = os.path.join(os.path.join(os.path.expanduser('~')), 'Desktop')
+    # desktop from home directory
+    if SYSTEM == "LINUX":
+        desktop = os.path.join(os.path.join(os.path.expanduser('~')), 'Desktop')
 
-    # on windows
-    # desktop = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')
-
+    else:
+        # on windows
+        desktop = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')
 
     # check is valid path
+    if not os.path.exists(desktop):
+        return None
 
-
-    # if not found or invalid, program fails
-    return None
+    return desktop
 
 if __name__=="__main__":
 
