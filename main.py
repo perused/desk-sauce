@@ -22,6 +22,10 @@ def operating_system():
 # returns: the path to the desktop on the current computer, None if error
 def desktop_path(system):
 
+    if system == None or (system != "linux" and system != "osx" and system != "windows"):
+        # print("Invalid system argument.")
+        return None
+
     # desktop from home directory
     if system == "linux" or system == "osx":
         desktop = os.path.join(os.path.join(os.path.expanduser('~')), 'Desktop')
@@ -38,11 +42,16 @@ def desktop_path(system):
 
 # args: None
 # returns: the path to the created directory on the desktop
-def create_folder(desk):
+def create_folder(desk, name):
 
-    directory = "Cleaned"
-    path = os.path.join(desk, directory)
-    os.mkdir(path)
+    if desk == None or (not os.path.exists(desk)) or name == None or name == "":
+        # print("Invalid create folder arguments.")
+        return None
+
+    path = os.path.join(desk, name)
+
+    if not os.path.exists(path):
+        os.mkdir(path)
 
     return path
 
@@ -58,6 +67,6 @@ if __name__=="__main__":
     if not desk:
         sys.exit("No desktop path found.")
 
-    folder = create_folder(desk)
+    folder = create_folder(desk, "Cleaned")
 
-    print("Success")
+    print("Main finished")
