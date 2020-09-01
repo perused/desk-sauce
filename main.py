@@ -16,6 +16,8 @@ def operating_system():
     elif sys.platform == "win32":
         SYSTEM = "windows"
 
+    return SYSTEM
+
 # args: None
 # returns: the path to the desktop on the current computer
 def desktop_path():
