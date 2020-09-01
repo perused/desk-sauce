@@ -18,7 +18,7 @@ def operating_system():
 
     return None
 
-# args: None
+# args: system- the type of operating system running on the computer
 # returns: the path to the desktop on the current computer, None if error
 def desktop_path(system):
 
@@ -40,7 +40,7 @@ def desktop_path(system):
 
     return desktop
 
-# args: None
+# args: desk- the path to the desktop, name- the name of the folder to be created on the desktop
 # returns: the path to the created directory on the desktop
 def create_folder(desk, name):
 
@@ -55,6 +55,22 @@ def create_folder(desk, name):
 
     return path
 
+
+# args: desk- the path to the desktop, folder- the path to the folder where cleaned items will be moved from the desktop
+# returns: None
+def move_items(desk, folder):
+
+    for root, directories, files in os.walk(desk):
+        for name in files:
+            filepath = os.path.join(root, name)
+            print(filepath)
+
+        for name in directories:
+            filepath = os.path.join(root, name)
+            print(filepath)
+
+    return None
+
 if __name__=="__main__":
 
     system = operating_system()
@@ -68,5 +84,10 @@ if __name__=="__main__":
         sys.exit("No desktop path found.")
 
     folder = create_folder(desk, "Cleaned")
+
+    if not folder:
+        sys.exit("Creating folder failed.")
+
+    move_items(desk, folder)
 
     print("Main finished")
