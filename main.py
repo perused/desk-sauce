@@ -2,7 +2,6 @@ import sys
 import os
 import re
 import shutil
-import tkinter as tk
 
 # args: None
 # returns: the type of operating system the current computer is running on, None if error
