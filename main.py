@@ -1,6 +1,7 @@
 import sys
 import os
 import re
+import shutil
 import tkinter as tk
 
 # args: None
@@ -60,14 +61,22 @@ def create_folder(desk, name):
 # returns: None
 def move_items(desk, folder):
 
+    images = ["png", "jpeg", "jpg", "gif"]
+    docs = ["doc", "docx", "odt", "pdf"]
+    other = ["zip"]
+    # leave directories alone?
+
     for root, directories, files in os.walk(desk):
         for name in files:
             filepath = os.path.join(root, name)
-            print(filepath)
+            shutil.copy(filepath, folder)
+            os.remove(filepath)
 
         for name in directories:
             filepath = os.path.join(root, name)
-            print(filepath)
+            if not folder == filepath:
+                shutil.copytree(filepath, folder)
+                shutil.rmtree(filepath)
 
     return None
 
